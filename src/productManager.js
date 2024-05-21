@@ -2,7 +2,7 @@ import fs from "fs";
 
 let products = [];
 
-const pathFile = "./src/data/products.json"
+const pathFile = "./data/products.json"
 
 const addProduct = async (product) => {
     await getProducts();

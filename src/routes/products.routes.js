@@ -1,5 +1,6 @@
 import { Router } from "express";
 import productManager from "../productManager.js";
+import { checkProductData } from "../middlewares/CheckProductData.middlewares.js";
 
 
 const router = Router();
@@ -7,7 +8,7 @@ const router = Router();
 router.get("/", async (req, res) => {
     try {
         const { limit } = req.query;
-        const products = productManager.getProducts(limit);
+        const products = await productManager.getProducts(limit);
 
         res.status(200).json({ status: "success", products})
 
@@ -30,7 +31,7 @@ router.get("/:pid", async (req, res) => {
     }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", checkProductData, async (req, res) => {
     try {
         const body = req.body;
         const product = await productManager.addProduct(body);
