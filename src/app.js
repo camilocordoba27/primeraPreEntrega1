@@ -3,6 +3,7 @@ import routes from "./routes/index.js";
 import __dirname from "./dirname.js"
 import handlebars  from "express-handlebars";
 import { Server } from "socket.io";
+import viewsRoutes from "./routes/views.routes.js"
 
 const app = express();
 
@@ -13,7 +14,11 @@ app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 app.use(express.static("public"));
 
+//rutas de la api
 app.use("/api", routes);
+
+// rutas de las vistas
+app.use("/", viewsRoutes)
 
 const httpServer = app.listen(8080, ()=> {
     console.log("Servidor escuchando en el puerto 8080")
@@ -21,7 +26,7 @@ const httpServer = app.listen(8080, ()=> {
 
 // socket io
 
-const io = new Server(httpServer);
+export const io = new Server(httpServer);
 io.on("connection", (socket) => {
     console.log("Nuevo usuario conectado");
 });
