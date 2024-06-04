@@ -38,7 +38,7 @@ deleteForm.addEventListener("submit", async (e) => {
 
 socket.on("products", (data) => {
     productsList.innerHTML = "";
-    data.forEach((product) => {
+    data.products.forEach((product) => {
         const card = document.createElement("div");
         card.classList.add("card");
         card.style.width = "18rem";
