@@ -38,7 +38,8 @@ deleteForm.addEventListener("submit", async (e) => {
 
 socket.on("products", (data) => {
     productsList.innerHTML = "";
-    data.products.forEach((product) => {
+    let data_list = data.products ? data.products : data
+    data_list.forEach((product) => {
         const card = document.createElement("div");
         card.classList.add("card");
         card.style.width = "18rem";
@@ -54,5 +55,6 @@ socket.on("products", (data) => {
       productsList.appendChild(card);
     })
 })
+
 
 
